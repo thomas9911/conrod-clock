@@ -10,3 +10,4 @@ Copied conrod glium threaded example.
 [Added]
 - nvml to get information from nvidia graphics card.
 - double click event handler
+- icon to executable
