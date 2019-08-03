@@ -1,0 +1,32 @@
+[package]
+name = "conrod_test"
+version = "0.1.0"
+authors = ["thomas9911 <thomastimmer11@hotmail.com>"]
+
+# [dependencies]
+# piston_window = "0.70.0"
+# # conrod = "0.61.1"
+# image = "*"
+# # conrod = { version = "^0.51.1", features = ["piston"] }
+# # piston = "0.37.0"
+# # piston2d-graphics = "0.26.0"
+# # pistoncore-glutin_window = "0.47.0"
+# # piston2d-opengl_graphics = "0.53.0"
+# find_folder = "*"
+# scrap = "0.5"
+# repng = "*"
+[[bin]]
+name = "clock"
+path = "src/clock.rs"
+
+[dependencies]
+conrod_core = "0.66"
+conrod_glium = "0.66"
+conrod_winit = "0.66"
+glium = {version = "0.24", features = ["glutin"]}
+find_folder = "0.3.0"
+image = "0.22.0"
+rand = "0.7.0"
+winit = "0.19"
+chrono  = "0.4.7"
+nvml-wrapper = "*"
