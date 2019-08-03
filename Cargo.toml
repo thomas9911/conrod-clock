@@ -15,6 +15,7 @@ authors = ["thomas9911 <thomastimmer11@hotmail.com>"]
 # find_folder = "*"
 # scrap = "0.5"
 # repng = "*"
+
 [[bin]]
 name = "clock"
 path = "src/clock.rs"
@@ -25,8 +26,11 @@ conrod_glium = "0.66"
 conrod_winit = "0.66"
 glium = {version = "0.24", features = ["glutin"]}
 find_folder = "0.3.0"
-image = "0.22.0"
+image = "0.21.2"
 rand = "0.7.0"
-winit = "0.19"
+winit = {version = "0.19", features=["icon_loading"]}
 chrono  = "0.4.7"
 nvml-wrapper = "*"
+
+[target.'cfg(windows)'.build-dependencies]
+winres = "0.1"

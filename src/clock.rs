@@ -1,6 +1,7 @@
 //! This example behaves the same as the `all_winit_glium` example while demonstrating how to run
 //! the `conrod` loop on a separate thread.
-// #![windows_subsystem = "windows"]
+
+#![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
 #[macro_use]
 extern crate conrod_core;
@@ -10,6 +11,7 @@ extern crate find_folder;
 extern crate glium;
 extern crate image;
 extern crate nvml_wrapper;
+extern crate winit;
 
 use conrod_glium::Renderer;
 use glium::backend::glutin;
@@ -40,6 +42,7 @@ fn main() {
     let mut events_loop = glium::glutin::EventsLoop::new();
     let window = glium::glutin::WindowBuilder::new()
         .with_title("Klok in Rust")
+        .with_window_icon(load_icon())
         .with_dimensions((WIN_W, WIN_H).into());
     let context = glium::glutin::ContextBuilder::new()
         .with_vsync(true)
@@ -102,8 +105,8 @@ fn main() {
 
             match d.update(&event) {
                 Some(ClickEvent::DoubleClick) => do_fullscreen(),
-                Some(ClickEvent::Click) => (),
-                None => ()
+                Some(ClickEvent::Click) => println!("CLICK"),
+                None => (),
             }
 
             // Use the `winit` backend feature to convert the winit event to a conrod one.
@@ -183,7 +186,6 @@ fn draw(
     renderer.draw(display, &mut target, &image_map).unwrap();
     target.finish().unwrap();
 }
-
 
 #[derive(Debug, Copy, Clone)]
 struct DoubleClicker {
@@ -267,4 +269,12 @@ impl DoubleClicker {
     fn is_double_click(&self) -> bool {
         self.prev_click + self.between_clicks > std::time::Instant::now()
     }
+}
+
+
+fn load_icon() -> Option<glium::glutin::Icon>{
+    let image_data = include_bytes!("../assets/clock.ico");
+    glium::glutin::Icon::from_bytes_with_format(image_data, image::ImageFormat::ICO)
+            .and_then(|x| Ok(Some(x)))
+            .unwrap_or(None)
 }
